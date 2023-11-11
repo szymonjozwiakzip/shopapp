@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema({
+  id: { type: String },
   title: { type: String, required: true },
   description: { type: String },
   creationDate: { type: Date, default: Date.now },

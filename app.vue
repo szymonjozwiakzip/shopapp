@@ -1,21 +1,32 @@
+<style>
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vh;
+    background: #74ebd5; 
+    background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5); 
+    background: linear-gradient(to right, #ACB6E5, #74ebd5); 
+  }
+</style>
 <template>
   <div>
     <h1>Dodaj nowy produkt</h1>
     <fieldset>
       
-    <legend>Dane użytkownika</legend>
+    <legend>Dane produktu</legend>
     <form @submit.prevent="submitForm">
       <label for="title">Tytuł:</label><br>
       <input v-model="item.title" type="text" id="title" required>
       <br>
       <label for="description">Opis:</label><br>
-      <textarea v-model="item.description" id="description" required></textarea>
+      <textarea v-model="item.description" id="description" placeholder="Podaj opis produktu"></textarea>
       <br>
       <label for="creationDate">Data:</label><br>
-      <input v-model="item.creationDate" type="date" id="creationDate" required>
+      <input v-model="item.creationDate" type="date" id="creationDate">
       <br>
       <label for="imageUrl">Zdjęcie:</label><br>
-      <input v-model="item.imageUrl" type="text" id="imageUrl" required>
+      <input v-model="item.imageUrl" type="text" id="imageUrl" placeholder="Podaj URL">
 
       <br>
       <button type="submit">Dodaj</button>
@@ -27,13 +38,12 @@
 
 <script>
 import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
+
 
 export default {
   data() {
     return {
       item: {
-        id: '',
         title: '',
         description: '',
         creationDate: '',
@@ -45,16 +55,14 @@ export default {
   methods: {
     async submitForm() {
       try {
-        this.item.id = uuidv4();
         const response = await axios.post('/api/add-product', this.item);
 
         this.item = {
-          id: '',
           title: '',
           description: '',
           creationDate: '',
           imageUrl: '',
-          isDeleted: 'no'
+          isDeleted: ''
         };
 
         console.log('Dodano produkt:', response.data);
