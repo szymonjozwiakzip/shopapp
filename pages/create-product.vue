@@ -1,22 +1,21 @@
-<style>
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100vh;
-  background: #74ebd5;
-  background: -webkit-linear-gradient(to right, #acb6e5, #74ebd5);
-  background: linear-gradient(to right, #acb6e5, #74ebd5);
-}
-</style>
 <template>
+  <div class="container">
+    <button><a href="/">Powrót</a></button>
+  </div>
   <div>
     <h1>Dodaj nowy produkt</h1>
     <fieldset>
       <legend>Dane produktu</legend>
       <form @submit.prevent="submitForm">
         <label for="title">Tytuł:</label><br />
-        <input v-model="item.title" type="text" id="title" required />
+        <input
+          style="width: 400px"
+          v-model="item.title"
+          type="text"
+          id="title"
+          placeholder="Podaj tytuł produktu"
+          required
+        />
         <br />
         <label for="description">Opis:</label><br />
         <textarea
@@ -27,6 +26,7 @@ body {
         <br />
         <label for="imageUrl">Zdjęcie:</label><br />
         <input
+          style="width: 400px"
           v-model="item.imageUrl"
           type="text"
           id="imageUrl"
@@ -39,9 +39,29 @@ body {
     </fieldset>
   </div>
 </template>
-
+<style>
+body {
+  text-align: center;
+}
+.container {
+  text-align: center;
+}
+form {
+  text-align: left;
+}
+fieldset {
+  width: 50%;
+  margin: 0 auto;
+  padding: 10px;
+  border: 8px double #f55549;
+  width: 400px;
+}
+</style>
 <script>
+import "@/style.css";
 import axios from "axios";
+//const { data } = await useFetch("/api/products");
+//console.log(data.value);
 
 export default {
   data() {

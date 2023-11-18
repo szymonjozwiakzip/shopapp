@@ -1,0 +1,56 @@
+/*@tailwind base;
+@tailwind components;
+@tailwind utilities; */
+@import url("https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner&family=Roboto:wght@100&display=swap");
+body {
+  font-family: "Roboto", cursive;
+  /* font-family: "Kdam Thmor Pro", sans-serif; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1100px; /*szerokość strony*/
+  margin-left: auto;
+  margin-right: auto;
+  background: #ffe5cc;
+  font-size: 25px;
+}
+
+.container {
+  display: flex;
+  align-items: center; /* Ustaw przyciski na górze kontenera */
+  justify-content: center; /* Ustaw przyciski na lewo kontenera */
+  width: 1100px; /* Szerokość strony */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button {
+  background: #ff99cc;
+  font-size: 15px;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+a {
+  font-size: 25px;
+  text-decoration: none;
+  color: #c4144c;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+}
+fieldset {
+  border: 8px double #f55549;
+  width: 400px;
+}
+textarea {
+  width: 500px;
+  font-size: 20px;
+  resize: none; /*blokujemy możliwość zmiany wielkości przez użytkownika*/
+}
+legend {
+  font-size: 30px;
+  color: #4a3f3e;
+}
