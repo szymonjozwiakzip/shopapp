@@ -19,28 +19,39 @@
       <br />
 
       <textarea
-        v-model="input"
+        v-model="inputValues[product._id]"
         id="description"
         placeholder="Napisz komentarz"
       ></textarea>
       <button @click="addCom(product._id)">Skomentuj!</button>
-      <button>Wyświetl komentarze</button>
+      <span
+        v-for="comment in getComments(product._id)"
+        :key="comment.commentId"
+      >
+        <p>{{ comment.description }}</p>
+      </span>
     </span>
   </fieldset>
 </template>
 
 <script setup lang="ts">
 import "@/style.css";
+import { comment } from "postcss";
 const addCom = async (productId) => {
   const { data } = await useFetch("/api/add-comment", {
     method: "POST",
     body: JSON.stringify({
       productId,
-      description: input.value,
+      description: inputValues[productId],
     }),
   });
 };
+const getComments = (productId) => {
+  return dataC.value.filter((comment) => comment.productId === productId);
+};
+const inputValues = reactive({});
 const input = ref(null);
+const { data: dataC } = await useFetch("/api/comments");
 const { data } = await useFetch("/api/products");
 console.log(data.value);
 </script>
