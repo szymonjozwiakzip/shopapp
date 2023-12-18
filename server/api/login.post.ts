@@ -1,24 +1,28 @@
-/*import { User } from "~~/server/models/user.model";
-export default handleLoginPost = (req: Request, res: Response) => {
+import { User } from "~~/server/models/user.model";
+export default defineEventHandler(async (event) => {
+  const body = await readBody(event);
   try {
-    const { username, password } = req.body;
-
-    const isValidLogin = verifyLogin(username, password);
-
-    if (isValidLogin) {
-      res.status(200).json({ success: true, token: "exampleToken" });
-    } else {
-      res
-        .status(401)
-        .json({ success: false, message: "Nieprawidłowe dane logowania" });
+    const user = await User.findOne({ username: body.username });
+    if (!user) {
+      return {
+        message: "Logowanie nie powiodło się - błędna nazwa użytkownika",
+      };
     }
+    const isPasswordEqual = body.password === user.password;
+    if (!isPasswordEqual) {
+      return {
+        message: "Logowanie nie powiodło się - błędne hasło",
+      };
+    }
+    return {
+      message: "Logowanie się powiodło",
+    };
   } catch (error) {
-    console.error("Błąd podczas logowania:", error);
-    res
-      .status(500)
-      .json({ success: false, message: "Wystąpił błąd podczas logowania" });
+    console.error(error);
+
+    return {
+      error: "Wystąpił błąd podczas połączenia z bazą.",
+    };
   }
-};
-const verifyLogin = (username: string, password: string): boolean => {
-  return username === password;
-}; */
+});
+

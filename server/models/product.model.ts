@@ -1,7 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema({
-  id: { type: String },
   title: { type: String, required: true },
   description: { type: String },
   creationDate: { type: Date, default: Date.now },
@@ -9,4 +8,4 @@ const productSchema = new mongoose.Schema({
   isDeleted: { type: Boolean, default: false },
 });
 
-export const Product = mongoose.model("Product", productSchema);
+export const Product = mongoose.model('Product', productSchema);

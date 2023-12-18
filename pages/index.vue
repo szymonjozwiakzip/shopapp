@@ -36,7 +36,15 @@
 
 <script setup lang="ts">
 import "@/style.css";
-import { comment } from "postcss";
+
+const supabase = useSupabaseUser();
+
+const logout = async () => {
+  const { error } = await supabase.auth.signOut();
+  if (error) console.log(error);
+};
+
+console.log(supabase.value);
 const addCom = async (productId) => {
   const { data } = await useFetch("/api/add-comment", {
     method: "POST",

@@ -1,16 +1,16 @@
 //const mongoose = require('./mongoconnection');
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const Product = require("./models/product.model.ts");
+// const mongoose = require("mongoose");
+// const bodyParser = require("body-parser");
+// const Product = require("./models/product.model.ts");
 
-require("dotenv").config();
+// require("dotenv").config();
 
-const port = 3000;
+// const port = 3000;
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// mongoose.connect(process.env.MONGODB_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
 // app.use(bodyParser.json());
 

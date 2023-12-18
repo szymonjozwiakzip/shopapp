@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <button><a href="/">Powrót</a></button>
+    <button><a href="/login">Powrót</a></button>
   </div>
   <div>
     <h1>Zarejestruj się</h1>
@@ -34,20 +34,19 @@
 </template>
 <script setup>
 import "@/style.css";
-const supabase = useSupabaseClient();
 const user = ref({
   email: "",
   password: "",
 });
+
+const supabase = useSupabaseClient();
 const register = async () => {
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email: user.value.email,
     password: user.value.password,
-    options: {
-      emailRedirectTo: "http://localhost:3000/confirm",
-    },
   });
   if (error) console.log(error);
+  console.log(data);
 };
 </script>
 <style>

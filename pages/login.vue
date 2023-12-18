@@ -1,16 +1,17 @@
 <template>
   <div class="container">
-    <button><a href="/">Powrót</a></button>
-    <button><a href="/create-login">Zarejestruj się</a></button>
+    <button><NuxtLink to="/">Powrót</NuxtLink></button>
+    <button><NuxtLink to="/register">Zarejestruj się</NuxtLink></button>
   </div>
   <div>
+    <button @click.prevent="logout">Wyloguj się</button>
     <h1>Zaloguj się</h1>
     <fieldset>
       <legend>Logowanie</legend>
       <label for="username">Nazwa użytkownika:</label><br />
       <input
         style="width: 400px"
-        v-model="user.username"
+        v-model="user.email"
         type="text"
         class="input"
         id="username"
@@ -30,17 +31,41 @@
       />
       <br />
       <button @click.prevent="login" class="button">Zaloguj się</button>
+      <!-- <button @click.prevent="register" class="button">Zarejestruj się</button> -->
     </fieldset>
   </div>
 </template>
 <script lang="ts" setup>
 import "@/style.css";
 const user = ref({
-  username: "",
+  email: "",
   password: "",
 });
 
-const login = async () => {};
+const supabase = useSupabaseClient();
+
+const login = async () => {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: user.value.email,
+    password: user.value.password,
+  });
+  if (error) console.log(error);
+  console.log(data);
+};
+
+const register = async () => {
+  const { data, error } = await supabase.auth.signUp({
+    email: user.value.email,
+    password: user.value.password,
+  });
+  if (error) console.log(error);
+  console.log(data);
+};
+
+const logout = async () => {
+  const { error } = await supabase.auth.signOut();
+  if (error) console.log(error);
+};
 </script>
 <style>
 body {
